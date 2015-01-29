@@ -1,5 +1,14 @@
-body { padding-top: 70px; }
+
 
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+.footer_icon {
+  height: 36px;
+  width: 36px;
+}
+
+body { padding-bottom: 70px; }
+
+body { padding-top: 70px; }

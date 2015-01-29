@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <a class="navbar-brand" href="#">gCamp</a>
+  </div>
+</nav>
+
 <html>
 <head>
   <title>Gcamp</title>
@@ -10,5 +15,27 @@
 
 <%= yield %>
 
+<!-- </body> -->
+<footer>
+<!-- <body> -->
+  <div class="container">
+    <hr></hr>
+
+    <div class = "row">
+      <div class = "col-md-4">
+        <%= link_to "Terms", terms_path(@terms)%>
+        |
+        <%= link_to "About", about_path(@about)%>
+      </div>
+      <div class = "col-md-8 text-right">
+        <%= link_to image_tag('link.jpg', class: "footer_icon"), "https://www.linkedin.com/profile/public-profile-settings?trk=prof-edit-edit-public_profile" %>
+        <%= link_to image_tag('GitHub.png', class: "footer_icon"), "https://github.com/danmorrisett" %>
+        <%= link_to image_tag('Twitter.png', class: "footer_icon"), "https://twitter.com/@Dan_Morrisett" %>
+        <%= link_to image_tag('galvanize.png', class: "footer_icon"), "https://students.gschool.it/students/277" %>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
 </body>
 </html>
