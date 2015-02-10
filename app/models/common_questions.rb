@@ -1,9 +1,8 @@
 class CommonQuestions
   attr_reader :question, :answer, :slug
-
   def initialize(question, answer, slug)
-    @question = question
-    @answer = answer
+    @question = question,
+    @answer = answer,
     @slug = slug
   end
 
@@ -14,8 +13,13 @@ class CommonQuestions
   def answer
     @answer
   end
-  
+
   def slug
     @slug
   end
+
+  def top
+    @top
+  end
+
 end
