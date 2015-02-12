@@ -11,12 +11,22 @@
       <a class="navbar-brand" href="#">gCamp</a>
     </div>
   </nav>
+  <div class="container">
+    
+  <% flash.each do | value | %>
+  <div class="alert alert-success", role="alert">
+    <div class="text-center">
+      <%= flash[:notice] %>
+    </div>
+  </div>
+  <% end %>
+
 <%= yield %>
 
 <!-- </body> -->
 <footer>
 <!-- <body> -->
-  <div class="container">
+
     <hr></hr>
 
     <div class = "row">
