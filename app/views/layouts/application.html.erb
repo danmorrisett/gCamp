@@ -9,10 +9,9 @@
   <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
       <a class="navbar-brand" href="#">gCamp</a>
-    </div>
   </nav>
-  <div class="container">
-    
+</div>
+
   <% flash.each do | value | %>
   <div class="alert alert-success", role="alert">
     <div class="text-center">
@@ -22,7 +21,7 @@
   <% end %>
 
 <%= yield %>
-
+<div class="container">
 <!-- </body> -->
 <footer>
 <!-- <body> -->
@@ -46,8 +45,8 @@
         <%= link_to image_tag('galvanize.png', class: "footer_icon"), "https://students.gschool.it/students/277" %>
       </div>
     </div>
-  </div>
 </footer>
+</div>
 </div>
 </body>
 </html>
