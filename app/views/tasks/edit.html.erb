@@ -1,14 +1,14 @@
 <div class="container">
+  <div class="page-header">
+    <h1>Update Task</h1>
+  </div>
 
-  <h3>Update task</h3>
-
-  <div class="row">
     <ol class="breadcrumb">
       <li><%= link_to 'Tasks', tasks_path %></li>
       <li><%= @task.description %></li>
     </ol>
-  </div>
 
   <%= render "form" %>
+
 
 </div>

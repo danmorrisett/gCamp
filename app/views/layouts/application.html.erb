@@ -11,7 +11,7 @@
       <a class="navbar-brand" href="#">gCamp</a>
   </nav>
 </div>
-
+<div class="container">
   <% flash.each do | value | %>
   <div class="alert alert-success", role="alert">
     <div class="text-center">
@@ -19,7 +19,7 @@
     </div>
   </div>
   <% end %>
-
+</div>
 <%= yield %>
 <div class="container">
 <!-- </body> -->
