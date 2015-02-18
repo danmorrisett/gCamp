@@ -15,8 +15,10 @@
 
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-6">
+    <% if @task.id %>
     <%= f.check_box :complete %>
     <%= f.label :complete %>
+    <% end %>
     </div>
   </div>
 
