@@ -19,12 +19,12 @@
     <% @task.each do |task| %>
     <tr>
       <td>
-        <% if task.complete%>
-        <strike><%= link_to task.description, task_path(task) %></strike>
+        <% if task.complete == true %>
+        <strike><%= @task.description %></strike>
 
         <% else %>
 
-        <%= link_to task.description, task_path(task) %>
+        <%= @task.description %>
 
         <% end %>
       </td>

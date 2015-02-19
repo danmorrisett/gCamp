@@ -8,6 +8,21 @@
 
   </div>
 
+  <h1>
+    <% @task.each do |task| %>
+    <tr>
+      <td>
+        <% if task.complete == true %>
+        <strike><%= @task.description %></strike>
+
+        <% else %>
+
+        <%= @task.description %>
+
+        <% end %>
+      </td>
+</h1>
+
     <ol class="breadcrumb">
       <li><%= link_to 'Tasks', tasks_path %></li>
       <li><%= @task.description %></li>
@@ -16,7 +31,7 @@
 
 </td>
 <div class= "container">
-  <td>
+  <td> <strong> Due On </strong>
   <% if @task.due_date %>
   <%= @task.due_date.strftime("%m/%d/%y")%>
   </td>
