@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = 'Task was successfully created.'
+      flash[:notice] = 'User was successfully created.'
       redirect_to users_path(@user)
     else
       render :new
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to users_path, notice: "The user has been successfully destroyed"
+    redirect_to users_path, notice: "The user has been successfully deleted"
   end
 
 
