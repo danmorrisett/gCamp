@@ -1,0 +1,27 @@
+<div class= "container">
+  <div class="page-header">
+    <div class="pull-right">
+      <%= link_to 'New project', new_project_path, class: "btn btn-info" %>
+    </div>
+    <h1>Projects</h1>
+  </div>
+
+  <table class= "table">
+    <thead>
+      <tr>
+        <th> Name </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+      <tr>
+        <p><td><%= link_to project.first_name.capitalize + ' ' + project.last_name.capitalize, project_path(project) %></td></p>
+        <td><%= mail_to project.email %></td>
+        <td><%= link_to "Edit", edit_project_path(project) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
