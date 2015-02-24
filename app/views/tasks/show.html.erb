@@ -1,5 +1,8 @@
 <div class="container">
   <div class="page-header">
+    <div class="pull-right">
+      <%= link_to 'Edit', edit_task_path(@task), class:"btn btn-info" %>
+    </div>
       <h1>
         <% if @task.complete == true %>
           <strike><%= @task.description %></strike>
@@ -8,10 +11,7 @@
       </h1>
         <% end %>
 
-    <div class="pull-right">
-      <%= link_to 'Edit', edit_task_path(@task), class:"btn btn-info" %>
-    </div>
-</div>
+  </div>
 
   <ol class="breadcrumb">
     <li><%= link_to 'Tasks', tasks_path %></li>
