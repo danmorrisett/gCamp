@@ -1,19 +1,10 @@
 <%= form_for @user, html: { class: "form-horizontal" } do |f| %>
 <div class="form-group">
-  <% if @user.errors.any? %>
-    <div class="col-sm-offset-2 col-md-7">
-      <div class="alert alert-danger" role="alert">
-        <h3><% pluralize(@user.errors.count, "errors") %>
-          <%= "1 error prohibited this form from being saved" %></h3>
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-      </div>
-    </div>
-  <% end %>
+  <div class="col-sm-offset-2 col-md-7">
+  <%= render partial: 'shared/errors', locals: {object: @user }%>
+  </div>
 </div>
+
 <% end %>
 
 <%= form_for @user, html: { class: "form-horizontal" } do |f| %>
