@@ -27,4 +27,7 @@ Things you may want to cover:
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
-[![Build Status](https://travis-ci.org/danmorrisett/gCamp.svg?branch=master)](https://travis-ci.org/danmorrisett/gCamp)
+[![Build Status](https://travis-ci.org/danmorrisett/gCamp.svg?branch=master)]
+(https://travis-ci.org/danmorrisett/gCamp)
+
+https://travis-ci.org/danmorrisett/gCamp
