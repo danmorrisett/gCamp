@@ -6,30 +6,37 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-      <a class="navbar-brand" href="#">gCamp</a>
-  </nav>
-</div>
-<div class="container">
-  <% flash.each do | value | %>
-  <div class="alert alert-success", role="alert">
+      <a class="navbar-brand" href="/">gCamp</a>
+      <ul class="nav navbar-nav navbar-right">
 
-      <%= flash[:notice] %>
+        <% if current_user %>
+          <li><%= link_to "#{current_user.first_name + ' ' + current_user.last_name}", user_path(current_user[:id]), class: "nav-bar" %></li>
 
+          <li><%= link_to "Sign Out", signout_path, class: "nav-bar" %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", signup_path %></li>
+          <li><%= link_to "Sign In", sign_in_path %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-  <% end %>
-</div>
+  <div class="container">
+    <% if flash[:notice] %>
+      <div class="alert alert-success", role="alert">
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
 
-<div>
-  <% if current_user %>
-    <%= link_to "Sign Out", signout_path %>
-  <% else %>
-    <%= link_to "Sign Up", signup_path %>
-    |
-    <%= link_to "Sign In", signin_path %>
-  <% end %>
-</div>
+      <% if flash[:alert] %>
+      <div class="alert alert-danger", role='alert'>
+        <%= flash[:alert] %>
+      </div>
+
+    <% end %>
+  <!-- </div> -->
+  </div>
 
 
 
