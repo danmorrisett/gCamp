@@ -1,8 +1,12 @@
 class TasksController < ApplicationController
+
+  before_action :ensure_current_user
+  
+
   def index
     @task = Task.all
   end
-  
+
   def new
     @task = Task.new
   end

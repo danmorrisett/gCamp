@@ -1,4 +1,8 @@
 class ProjectsController < ApplicationController
+
+  before_action :ensure_current_user
+  
+
   def index
     @projects = Project.all
   end
