@@ -17,7 +17,7 @@ require "rails_helper"
       sign_in_user
       click_link 'Projects'
       expect(current_path).to eq projects_path
-      click_link 'New Project'
+      click_link 'New project'
 
       expect(current_path).to eq new_project_path
 
@@ -55,7 +55,7 @@ require "rails_helper"
 
       click_link 'Edit'
 
-      expect(current_path).to eq(project_path(project))
+      expect(current_path).to eq(edit_project_path(project))
       expect(page).to have_content 'Project was successfully updated'
     end
 
