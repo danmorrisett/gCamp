@@ -1,13 +1,11 @@
 require 'rails_helper'
 
-festure 'Existing user can CRUD a task' do
+feature 'Existing user can CRUD a Task' do
   scenario 'signs in, goes to project index page, and clicks through to task showpage' do
 
-    login
+    sign_in_user
 
     project = create_project
-
-    visit project_tasks_path(project)
 
     expect(page).to have_content 'Tasks'
 
@@ -15,15 +13,13 @@ festure 'Existing user can CRUD a task' do
 
   scenario 'can create a new task and see a success message' do
 
-    project = create_project
+    sign_in_user
 
-    login
-
-    visit project_tasks_path(project)
+    click_link 'Tasks'
 
     click_link 'New Task'
 
-    expect(current_path).to eq new_project_task_path(project)
+    expect(current_path).to eq new_task_path
 
     fill_in :task_description, with: 'Learn Ruby'
     fill_in :task_due_date, with: '01/01/2001'
@@ -35,70 +31,60 @@ festure 'Existing user can CRUD a task' do
 
   scenario 'can read an existing Task' do
 
-    project = create_project
-    task = create_task(project)
+    task = create_task(description: "Catch a raccoon")
 
-    login
+    sign_in_user
 
-    visit project_tasks_path(project)
+    visit tasks_path
 
-    click_link 'Test task for a project'
-
-    expect(current_path).to eq project_task_path(project,task)
-    expect(page).to have_content 'Test task for a project'
-    expect(page).to have_link 'Edit'
+    expect(page).to have_content 'Catch a raccoon'
   end
 
   scenario 'can update an existing task and see a success message' do
-    project = create_project
-    task = create_task(project)
+    task = create_task(description: "Catch a raccoon")
 
-    login
+    sign_in_user
 
-    visit project_tasks_path(project)
+    visit tasks_path
 
     click_link 'Edit'
 
-    expect(current_path).to eq edit_project_task_path(project,task)
+    expect(current_path).to eq edit_task_path(task)
 
-    fill_in :task description, with: 'Learn Ruby'
+    fill_in :task_description, with: 'Learn Ruby'
 
     click_button 'Update Task'
 
-    expect(current_path).to eq (project_task_path(project,task))
+    expect(current_path).to eq (task_path(task))
     expect(page).to have_content 'Task was successfully updated'
+    expect(page).to have_content 'Learn Ruby'
   end
 
   scenario 'delete an existing task' do
-    project = create_project
-    task = create_task(project)
+    task = create_task(description: 'Muhammad Ali')
 
-    login
+    sign_in_user
 
-    visit project_tasks_path(project)
+    visit tasks_path
+
+    expect(page).to have_content 'Muhammad Ali'
 
     click_link 'Delete'
 
-    expect(current_path).to eq project_tasks_path(projects)
-    expect(page).to_not have_content 'Test taks for a project'
-    expect { task.reload }.to raise_error ActiveRecord::RecordNotFound
+    expect(current_path).to eq tasks_path
+    expect(page).to_not have_content 'Muhammad Ali'
   end
 
   scenario 'can see validations without a description' do
+    sign_in_user
 
-    project = create_project
-
-    login
-
-    visit projet_tasks_path(project)
+    visit tasks_path
 
     click_link 'New Task'
 
-    expect(current_path).to eq new_project_task_path(project)
-
     click_button 'Create Task'
 
-    expect(page).to have_content '1 error pohibited this form from being saved: Description can\'t be blank'
+    expect(page).to have_content '1 error prohibited this form from being saved Description can\'t be blank'
   end
 
 end

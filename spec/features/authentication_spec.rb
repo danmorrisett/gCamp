@@ -2,7 +2,7 @@ require 'rails_helper'
 
   feature 'Sign in as an existing user' do
     scenario 'can log in to see tasks, projects, and user' do
-      user = User.new(first_name: 'Mo', last_name: 'Ali', email: MoAli@gmail.com, passowrd:'123')
+      user = User.new(first_name: 'Mo', last_name: 'Ali', email: 'MoAli@gmail.com', password:'123')
       user.save!
 
       visit root_path
@@ -16,7 +16,7 @@ require 'rails_helper'
       click_button 'Sign In'
 
       expect(current_path).to eq root_path
-      expect(page).to have_content 'You have successfully signed in'
+      expect(page).to have_content 'You have signed in successfully'
       expect(page).to have_content 'Your life, organized'
 
       user.destroy!

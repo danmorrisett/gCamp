@@ -55,8 +55,7 @@ require "rails_helper"
 
       click_link 'Edit'
 
-      expect(current_path).to eq(edit_project_path(project))
-      expect(page).to have_content 'Project was successfully updated'
+      expect(current_path).to eq edit_project_path(project)
     end
 
     scenario 'delete an existing project with success massage' do
@@ -65,7 +64,7 @@ require "rails_helper"
       sign_in_user
 
       click_link 'Projects'
-      expect(curent_path).to eq projects_path
+      expect(current_path).to eq projects_path
       click_link 'Project Mayhem'
 
       expect(current_path).to eq project_path(project)
@@ -81,14 +80,13 @@ require "rails_helper"
       sign_in_user
       click_link 'Projects'
       expect(current_path).to eq projects_path
-      click_link 'New Project'
+      click_link "New project"
 
       expect(current_path).to eq new_project_path
 
       click_button 'Create Project'
 
-      expect(page).to have_content '1 error prohibited this form from being saved:
-      Name can\'t be blank'
+      expect(page).to have_content '1 error prohibited this form from being saved'
 
     end
 

@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_action :ensure_current_user
-  
+
 
   def index
     @projects = Project.all
@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to projects_path, notice: "Project has been successfully deleted"
+    redirect_to projects_path, notice: "Project was successfully deleted"
   end
 
   private
