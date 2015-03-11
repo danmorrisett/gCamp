@@ -12,6 +12,17 @@ def create_task(options= {})
   }.merge(options))
 end
 
+# before :each do
+  # user = User.create(first_name: 'Bill',
+  # last_name: 'Clinton',
+  # email: 'Innocent@gmail.com',
+  # password: 'bornagain')
+  # visit root_path
+  # click_link 'Sign In'
+  # fill_in 'Email', with: user.email
+  # fill_in 'Password', with: user.password
+  # click_button 'Sign In'
+# end
 # def create_task (project, options = {})
 #   Task.create!({
 #     description: 'Test task for a project',

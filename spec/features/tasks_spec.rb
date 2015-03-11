@@ -61,18 +61,18 @@ feature 'Existing user can CRUD a Task' do
   end
 
   scenario 'delete an existing task' do
-    task = create_task(description: 'Muhammad Ali')
+    task = create_task(description: 'Mohammad Ali')
 
     sign_in_user
 
     visit tasks_path
 
-    expect(page).to have_content 'Muhammad Ali'
+    expect(page).to have_content 'Mohammad Ali'
 
     click_link 'Delete'
 
     expect(current_path).to eq tasks_path
-    expect(page).to_not have_content 'Muhammad Ali'
+    expect(page).to_not have_content 'Mohammad Ali'
   end
 
   scenario 'can see validations without a description' do
