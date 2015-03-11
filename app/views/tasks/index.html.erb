@@ -1,7 +1,7 @@
 <div class="container">
   <div class="page-header">
     <div class="pull-right">
-      <%= link_to 'New Task', new_task_path, class: "btn btn-info" %>
+      <%= link_to 'New Task', new_project_task_path(@project), class: "btn btn-info" %>
     </div>
     <h1>Tasks</h1>
   </div>
@@ -16,15 +16,15 @@
       </tr>
     </thead>
     <tbody>
-    <% @task.each do |task| %>
+    <% @tasks.each do |task| %>
     <tr>
       <td>
         <% if task.complete%>
-        <strike><%= link_to task.description, task_path(task) %></strike>
+        <strike><%= link_to task.description, project_task_path(@project, task) %></strike>
 
         <% else %>
 
-        <%= link_to task.description, task_path(task) %>
+        <%= link_to task.description, project_task_path(@project, task) %>
 
         <% end %>
       </td>
@@ -36,8 +36,8 @@
         </td>
         <td>
           <div class= "pull-right">
-            <%= link_to "Edit", edit_task_path(task), class: "btn btn-info" %>
-            <%= link_to "Delete", task_path(task), class: "btn btn-danger", method: :delete, data:{confirm: "Are you sure?"}%>
+            <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-info" %>
+            <%= link_to "Delete", project_task_path(@project, task), class: "btn btn-danger", method: :delete, data:{confirm: "Are you sure?"}%>
           </div>
       </td>
     </tr>
