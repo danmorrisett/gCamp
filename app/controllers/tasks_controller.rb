@@ -3,9 +3,13 @@ class TasksController < ApplicationController
   before_action :ensure_current_user
   before_action :find_and_set_project
 
+  before_action do
+    @project = Project.find(params[:project_id])
+  end
+
   def index
     @tasks = @project.tasks
-    @name = @project.name
+    
   end
 
   def new

@@ -8,7 +8,8 @@ def create_task(options= {})
   Task.create!({
     description: 'New Task',
     due_date: '01/01/2001',
-    complete: false
+    complete: false,
+    project_id: create_project.id
   }.merge(options))
 end
 

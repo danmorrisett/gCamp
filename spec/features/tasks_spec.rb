@@ -15,11 +15,15 @@ feature 'Existing user can CRUD a Task' do
 
     sign_in_user
 
-    click_link 'Tasks'
+    project = create_project
+
+    click_link 'Projects'
+
+    click_link '0'
 
     click_link 'New Task'
 
-    expect(current_path).to eq new_task_path
+    expect(current_path).to eq new_project_task_path(project)
 
     fill_in :task_description, with: 'Learn Ruby'
     fill_in :task_due_date, with: '01/01/2001'
@@ -30,55 +34,60 @@ feature 'Existing user can CRUD a Task' do
   end
 
   scenario 'can read an existing Task' do
-
-    task = create_task(description: "Catch a raccoon")
+    project = create_project
+    task = create_task(description: "Catch a raccoon", project_id: project.id)
 
     sign_in_user
 
-    visit tasks_path
+    visit project_tasks_path(project)
 
     expect(page).to have_content 'Catch a raccoon'
   end
 
   scenario 'can update an existing task and see a success message' do
-    task = create_task(description: "Catch a raccoon")
+    project = create_project
+
+    task = create_task(description: "Catch a raccoon", project_id: project.id)
 
     sign_in_user
 
-    visit tasks_path
+    visit project_tasks_path(project)
 
     click_link 'Edit'
 
-    expect(current_path).to eq edit_task_path(task)
+    expect(current_path).to eq edit_project_task_path(project, task)
 
     fill_in :task_description, with: 'Learn Ruby'
 
     click_button 'Update Task'
 
-    expect(current_path).to eq (task_path(task))
+    expect(current_path).to eq (project_task_path(project, task))
     expect(page).to have_content 'Task was successfully updated'
     expect(page).to have_content 'Learn Ruby'
   end
 
   scenario 'delete an existing task' do
-    task = create_task(description: 'Mohammad Ali')
+    project = create_project
+    task = create_task(description: 'Mohammad Ali', project_id: project.id)
 
     sign_in_user
 
-    visit tasks_path
+    visit project_tasks_path(project)
 
     expect(page).to have_content 'Mohammad Ali'
 
     click_link 'Delete'
 
-    expect(current_path).to eq tasks_path
+    expect(current_path).to eq project_tasks_path(project)
     expect(page).to_not have_content 'Mohammad Ali'
   end
 
   scenario 'can see validations without a description' do
+    project = create_project
+
     sign_in_user
 
-    visit tasks_path
+    visit project_tasks_path(project)
 
     click_link 'New Task'
 
