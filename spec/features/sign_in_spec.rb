@@ -15,4 +15,17 @@ require 'rails_helper'
       expect(page).to have_content("Dan M")
       expect(current_path).to eq '/'
     end
+
+    scenario 'User can not log in without proper credentials' do
+
+      visit root_path
+      click_on 'Sign In'
+      click_button 'Sign In'
+      expect(current_path).to eq(sign_in_path)
+      expect(page).to have_content "Email / Password combination is invalid"
+    end
+
+
+
+
   end
