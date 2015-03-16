@@ -3,7 +3,7 @@
     <div class="pull-right">
       <%= link_to 'New Task', new_project_task_path(@project), class: "btn btn-info" %>
     </div>
-    <h1>Tasks</h1>
+    <h1>Tasks for <%= @project.name %></h1>
   </div>
 
   <ul class="breadcrumb">
@@ -16,7 +16,6 @@
     <thead>
       <tr>
         <th> Description </th>
-
         <th> Due On </th>
 
       </tr>
