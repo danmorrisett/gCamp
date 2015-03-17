@@ -9,7 +9,7 @@ class MembershipsController < ApplicationController
   end
 
   def create
-    @membership = @project.memberships.new(membership_params)
+    @membership = @project.memberships.new(membership_params.merge(role: params[:membership][:role].to_i))
     if @membership.save
       flash[:success] = "#{@membership.user.full_name} was successfully added"
       redirect_to project_memberships_path
@@ -24,9 +24,9 @@ class MembershipsController < ApplicationController
 
   def update
     @membership = Membership.find(params[:id])
-    if @membership.update(membership_params)
+    if @membership.update(membership_params.merge(role: params[:membership][:role].to_i))
       flash[:success] = "#{@membership.user.full_name} was successfully updated"
-      redirect_to project_memberships_path
+      redirect_to project_memberships_path(@project)
     else
       render :index
     end
