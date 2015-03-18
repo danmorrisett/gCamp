@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :ensure_current_user
-  
+
   def index
     @users = User.all
   end
@@ -40,8 +40,11 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to users_path, notice: "User has been successfully deleted"
+    if  @user.destroy
+      redirect_to users_path, notice: "User has been successfully deleted"
+    else
+      render :edit
+    end
   end
 
 
