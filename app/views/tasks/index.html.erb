@@ -30,6 +30,7 @@
         <% else %>
 
         <%= link_to task.description, project_task_path(@project, task) %>
+        <%= link_to task.comments.count, project_task_path(@project, task), class: "badge" %>
 
         <% end %>
       </td>
