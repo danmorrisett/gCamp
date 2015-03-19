@@ -20,4 +20,9 @@ Rails.application.routes.draw do
     resources :memberships
   end
 
+
+  resources :tasks, only: [] do
+    resources :comments, only: [:create]
+  end
+
 end

@@ -9,7 +9,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = @project.tasks
-    
+
   end
 
   def new
@@ -28,6 +28,7 @@ class TasksController < ApplicationController
 
   def show
     @task = @project.tasks.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit
