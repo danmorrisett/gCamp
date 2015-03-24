@@ -1,4 +1,6 @@
 class CommentsController <ApplicationController
+  before_action :ensure_current_user
+  
   before_action :prop_task
 
   def create

@@ -27,10 +27,16 @@
       <div class="alert alert-success", role="alert">
         <%= flash[:notice] %>
       </div>
-      <% end %>
+    <% end %>
+
+    <% if flash[:error] %>
+      <div class="alert alert-danger", role="alert">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
 
 
-    
+
   <!-- </div> -->
   </div>
 
