@@ -13,11 +13,15 @@
   </ol>
 
 
+  <div class='col-md-7'>
+    <%= render partial: 'shared/errors', locals:{object:@membership} %>
+  </div>
+
+
   <div class="row">
     <%= form_for [@project, @membership], html: {class: "form-inline" } do |f| %>
     <div class='col-md-7'>
       <div class='well'>
-        <%= render partial: 'shared/errors', locals:{object:@membership} %>
         <%= f.collection_select(:user_id, User.all, :id, :full_name, {prompt: "please select a user..."},{class: 'form-control'}) %>
         <%= f.collection_select(:role, Membership.roles, :second, :first, {},{class: 'form-control'}) %>
         <%= f.submit "Add New Member", class: 'btn btn-primary' %>
