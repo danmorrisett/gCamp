@@ -12,10 +12,18 @@
     <li class="active">Memberships</li>
   </ol>
 
-
-  <div class='col-md-7'>
-    <%= render partial: 'shared/errors', locals:{object:@membership} %>
+  <% if @membership.errors.any? %>
+  <div class= "row">
+    <div class= "col-md-7">
+      <div class= "alert alert-danger">
+        <h3><%= pluralize(@membership.errors.count, "error") %> prohibited this form from being saved:</h3>
+        <% @membership.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </div>
+    </div>
   </div>
+  <% end %>
 
 
   <div class="row">
