@@ -1,10 +1,14 @@
 require 'rails_helper'
 
+
   feature 'Users should be able to sign out' do
 
-   it 'should be able to click on the sign out button' do
+      before :each do
+        user = create_user
+        sign_in_user(user)
+      end
 
-       sign_in_user
+   it 'should be able to click on the sign out button' do
 
        visit root_path
        click_on 'Sign Out'

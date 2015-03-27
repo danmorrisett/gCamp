@@ -13,6 +13,16 @@ def create_task(options= {})
   }.merge(options))
 end
 
+def create_user(option= {})
+  User.create!({
+  first_name: 'Bill',
+  last_name: 'Clinton',
+  email: 'Bill@Cigars.com',
+  password: 'Cigars',
+  password_confirmation: 'Cigars'
+  })
+end
+
 # before :each do
   # user = User.create(first_name: 'Bill',
   # last_name: 'Clinton',

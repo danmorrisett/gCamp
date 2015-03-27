@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 feature 'Existing user can CRUD a Task' do
-  scenario 'signs in, goes to project index page, and clicks through to task showpage' do
 
-    sign_in_user
+  before :each do
+    user = create_user
+    sign_in_user(user)
+  end
+
+  scenario 'signs in, goes to project index page, and clicks through to task showpage' do
 
     project = create_project
 
@@ -12,8 +16,6 @@ feature 'Existing user can CRUD a Task' do
   end
 
   scenario 'can create a new task and see a success message' do
-
-    sign_in_user
 
     project = create_project
 
@@ -37,8 +39,6 @@ feature 'Existing user can CRUD a Task' do
     project = create_project
     task = create_task(description: "Catch a raccoon", project_id: project.id)
 
-    sign_in_user
-
     visit project_tasks_path(project)
 
     expect(page).to have_content 'Catch a raccoon'
@@ -48,8 +48,6 @@ feature 'Existing user can CRUD a Task' do
     project = create_project
 
     task = create_task(description: "Catch a raccoon", project_id: project.id)
-
-    sign_in_user
 
     visit project_tasks_path(project)
 
@@ -70,13 +68,11 @@ feature 'Existing user can CRUD a Task' do
     project = create_project
     task = create_task(description: 'Mohammad Ali', project_id: project.id)
 
-    sign_in_user
-
     visit project_tasks_path(project)
 
     expect(page).to have_content 'Mohammad Ali'
 
-    click_link 'Delete'
+    page.find(".glyphicon-remove").click
 
     expect(current_path).to eq project_tasks_path(project)
     expect(page).to_not have_content 'Mohammad Ali'
@@ -84,8 +80,6 @@ feature 'Existing user can CRUD a Task' do
 
   scenario 'can see validations without a description' do
     project = create_project
-
-    sign_in_user
 
     visit project_tasks_path(project)
 

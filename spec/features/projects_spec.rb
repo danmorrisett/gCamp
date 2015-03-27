@@ -1,11 +1,16 @@
 require "rails_helper"
 
+
   feature 'Existing user can CRUD a Project' do
+
+      before :each do
+        user = create_user
+        sign_in_user(user)
+      end
+
     scenario 'visits root_path, signs in, and goes to a Project index page' do
       project = Project.new(name: 'Project Mayhem')
       project.save!
-
-      sign_in_user
 
       click_link 'Projects'
       expect(page).to have_content 'Project Mayhem'
@@ -14,7 +19,7 @@ require "rails_helper"
 
     scenario 'can create a new project and see success message' do
 
-      sign_in_user
+
       click_link 'Projects'
       expect(current_path).to eq projects_path
       click_link 'New project'
@@ -33,7 +38,7 @@ require "rails_helper"
       project = Project.new(name: 'Project Mayhem')
       project.save!
 
-      sign_in_user
+
       click_link 'Projects'
       expect(current_path).to eq projects_path
 
@@ -47,8 +52,6 @@ require "rails_helper"
       project = Project.new(name: "The woods!")
       project.save!
 
-      sign_in_user
-
       click_link 'Projects'
       expect(current_path).to eq projects_path
       click_link 'The woods!'
@@ -61,7 +64,6 @@ require "rails_helper"
     scenario 'delete an existing project with success massage' do
       project = Project.new(name: 'Project Mayhem')
       project.save!
-      sign_in_user
 
       click_link 'Projects'
       expect(current_path).to eq projects_path
@@ -77,7 +79,6 @@ require "rails_helper"
 
     scenario 'can see validations without a name' do
 
-      sign_in_user
       click_link 'Projects'
       expect(current_path).to eq projects_path
       click_link "New project"
