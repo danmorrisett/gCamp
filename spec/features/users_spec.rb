@@ -34,23 +34,22 @@ feature "Check users pages w flash and validations" do
     fill_in "user_password_confirmation", with: "password"
     click_on ("Create User")
     expect(page).to have_content ("User was successfully created.")
-    expect(current_path).to eq("users")
   end
 
   scenario "users can see specific user details" do
-    new_user = User.new({first_name: "Bill", last_name: "Clinton", email: "cool@names.com", password: "password", password_confirmation: "password"})
+    new_user = User.new({first_name: "Freddie", last_name: "Mercury", email: "cool@names.com", password: "password", password_confirmation: "password"})
     new_user.save
     visit users_path
-    click_on ("Bill Clinton")
-    expect(page).to have_content ("Bill")
-    expect(page).to have_content ("Clinton")
+    click_on ("Freddie Mercury")
+    expect(page).to have_content ("Freddie")
+    expect(page).to have_content ("Mercury")
     expect(page).to have_content ("cool@names.com")
     expect(page).to have_content ("User")
     expect(current_path).to eq("/users/#{new_user[:id]}")
   end
 
   scenario "users can edit users detials except password" do
-    new_user = User.new({first_name: "Slovodan", last_name: "Melosovic", email: "cool@names.com", password: "password", password_confirmation: "password"})
+    new_user = User.new({first_name: "Bill", last_name: "Clinton", email: "cool@names.com", password: "password", password_confirmation: "password"})
     new_user.save
     visit "/users/#{new_user[:id]}"
     click_on ("Edit")
@@ -72,13 +71,13 @@ feature "Check users pages w flash and validations" do
   end
 
   scenario "users can delete user" do
-    new_user = User.new({first_name: "Bill", last_name: "Clinton", email: "cool@names.com", password: "password"})
+    new_user = User.new({first_name: "Freddie", last_name: "Mercury", email: "cool@names.com", password: "password"})
     new_user.save
     visit "/users/#{new_user[:id]}"
     click_on ("Edit")
     click_on ("Delete User")
     expect(page).to have_content ("User was successfully deleted.")
-    expect(page).to have_no_content ("Bill Clinton")
+    expect(page).to have_no_content ("Freddie Mercury")
     expect(current_path).to eq("/users")
   end
 end
