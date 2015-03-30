@@ -1,4 +1,4 @@
-class CommonQuestionsController < ApplicationController
+class CommonQuestionsController < StaticController
   def index
     @question =[
       CommonQuestions.new("What is gCamp?", "gCamp is an awesome tool that is going to change your life.

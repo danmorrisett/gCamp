@@ -1,0 +1,83 @@
+<html>
+<head>
+  <title>Gcamp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <a class="navbar-brand" href="/">gCamp</a>
+      <ul class="nav navbar-nav navbar-right">
+
+
+        <% if current_user %>
+        <li><%= link_to "#{current_user.first_name + ' ' + current_user.last_name}", user_path(current_user[:id]), class: "nav-bar" %></li>
+
+        <li><%= link_to "Sign Out", signout_path, class: "nav-bar" %></li>
+        <% else %>
+        <li><%= link_to "Sign Up", signup_path %></li>
+        <li><%= link_to "Sign In", sign_in_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <% if flash[:notice] %>
+    <div class="alert alert-success", role="alert">
+      <%= flash[:notice] %>
+    </div>
+    <% end %>
+
+    <% if flash[:error] %>
+    <div class="alert alert-danger", role="alert">
+      <%= flash[:error] %>
+    </div>
+    <% end %>
+
+
+
+    <!-- </div> -->
+  </div>
+
+
+
+  <%= yield %>
+  <div class="container">
+    <!-- </body> -->
+    <footer>
+      <!-- <body> -->
+
+      <hr></hr>
+
+      <div class = "row">
+        <div class = "col-md-4">
+          <%= link_to "Terms", terms_path%>
+          |
+          <%= link_to "About", about_path%>
+          |
+          <%= link_to "FAQ", faq_path%>
+
+          <% if current_user %>
+
+          |
+          <%= link_to "Users", users_path%>
+          |
+          <%= link_to "Projects", projects_path%>
+
+          <% end %>
+        </div>
+        <div class = "col-md-8 text-right">
+          <%= link_to image_tag('link.jpg', class: "footer_icon"), "https://www.linkedin.com/profile/public-profile-settings?trk=prof-edit-edit-public_profile" %>
+          <%= link_to image_tag('GitHub.png', class: "footer_icon"), "https://github.com/danmorrisett" %>
+          <%= link_to image_tag('Twitter.png', class: "footer_icon"), "https://twitter.com/@Dan_Morrisett" %>
+          <%= link_to image_tag('galvanize.png', class: "footer_icon"), "https://students.gschool.it/students/277" %>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

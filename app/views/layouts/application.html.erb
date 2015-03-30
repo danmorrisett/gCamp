@@ -8,9 +8,23 @@
 <body>
   <div class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-      <a class="navbar-brand" href="/">gCamp</a>
-      <ul class="nav navbar-nav navbar-right">
+      <a class="navbar-brand" href="/projects">gCamp</a>
 
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <% current_user.projects.each do |project| %>
+              <li><%= link_to "#{project.name}", project_path(project) %></li>
+            <% end %>
+            <li class="divider"></li>
+            <li><%= link_to 'New Project', new_project_path %></a></li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li><%= link_to "#{current_user.first_name + ' ' + current_user.last_name}", user_path(current_user[:id]), class: "nav-bar" %></li>
 
@@ -51,7 +65,7 @@
     <hr></hr>
 
     <div class = "row">
-      <div class = "col-md-4">
+      <div class = "text-center">
         <%= link_to "Terms", terms_path%>
         |
         <%= link_to "About", about_path%>
@@ -66,12 +80,6 @@
           <%= link_to "Projects", projects_path%>
 
         <% end %>
-      </div>
-      <div class = "col-md-8 text-right">
-        <%= link_to image_tag('link.jpg', class: "footer_icon"), "https://www.linkedin.com/profile/public-profile-settings?trk=prof-edit-edit-public_profile" %>
-        <%= link_to image_tag('GitHub.png', class: "footer_icon"), "https://github.com/danmorrisett" %>
-        <%= link_to image_tag('Twitter.png', class: "footer_icon"), "https://twitter.com/@Dan_Morrisett" %>
-        <%= link_to image_tag('galvanize.png', class: "footer_icon"), "https://students.gschool.it/students/277" %>
       </div>
     </div>
 </footer>

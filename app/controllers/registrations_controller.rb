@@ -1,4 +1,4 @@
-class RegistrationsController < ApplicationController
+class RegistrationsController < StaticController
 
 
   def new

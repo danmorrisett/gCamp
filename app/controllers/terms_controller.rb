@@ -1,4 +1,4 @@
-class TermsController < ApplicationController
+class TermsController < StaticController
 
   def index
   end
