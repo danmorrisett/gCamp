@@ -9,11 +9,18 @@ require "rails_helper"
       end
 
     scenario 'visits root_path, signs in, and goes to a Project index page' do
-      project = Project.new(name: 'Project Mayhem')
-      project.save!
 
-      click_link 'Projects'
-      expect(page).to have_content 'Project Mayhem'
+      visit projects_path
+      within (".new-project-header") do click_on 'New project'
+      end
+      fill_in 'Name', with: 'test'
+
+      click_on 'Create Project'
+      # project = Project.new(name: 'Project Mayhem')
+      # project.save!
+      #
+      # click_link 'Projects'
+      # expect(page).to have_content 'Project Mayhem'
 
     end
 
@@ -35,16 +42,19 @@ require "rails_helper"
     end
 
     scenario 'can read an existing Project' do
-      project = Project.new(name: 'Project Mayhem')
-      project.save!
+      visit projects_path
+      within (".new-project-header") do click_on 'New project'
+      end
+      fill_in 'Name', with: 'test'
+
+      click_on 'Create Project'
 
 
-      click_link 'Projects'
-      expect(current_path).to eq projects_path
-
-      click_link 'Project Mayhem'
+      within ('.breadcrumb') do
+        click_link 'test'
+      end
       expect(current_path).to eq project_path(project)
-      expect(page).to have_content 'Project Mayhem'
+      expect(page).to have_content 'test'
       expect(page).to have_link 'Edit'
     end
 

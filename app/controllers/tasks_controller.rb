@@ -2,6 +2,8 @@ class TasksController < ApplicationController
 
   before_action :ensure_current_user
   before_action :find_and_set_project
+  before_action :ensure_membership, only: [:index]
+
 
   before_action do
     @project = Project.find(params[:project_id])
@@ -51,6 +53,13 @@ class TasksController < ApplicationController
   end
 
     private
+
+    def ensure_membership
+      if !current_user.memberships.find_by(:project_id => @project.id)
+        flash[:error] = 'You do not have access to that project'
+        redirect_to projects_path
+      end
+    end
 
     def find_and_set_project
       @project = Project.find(params[:project_id])
