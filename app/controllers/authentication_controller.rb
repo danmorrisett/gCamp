@@ -14,7 +14,7 @@ class AuthenticationController < StaticController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:notice] = 'You have signed in successfully'
-      redirect_to root_path
+      redirect_to "/projects"
     else
       @auth_error = 'Email / Password combination is invalid'
       render :new
