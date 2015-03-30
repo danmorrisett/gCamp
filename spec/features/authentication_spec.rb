@@ -15,9 +15,9 @@ require 'rails_helper'
       fill_in :password, with: '123'
       click_button 'Sign In'
 
-      expect(current_path).to eq root_path
+      expect(current_path).to eq "/projects"
       expect(page).to have_content 'You have signed in successfully'
-      expect(page).to have_content 'Your life, organized'
+      expect(page).to have_content 'New Project'
 
       user.destroy!
     end

@@ -14,7 +14,7 @@
       within("form") {click_on "Sign In"}
       expect(page).to have_content("You have signed in successfully")
       expect(page).to have_content("Dan M")
-      expect(current_path).to eq '/'
+      expect(current_path).to eq projects_path
     end
 
     scenario 'User can not log in without proper credentials' do

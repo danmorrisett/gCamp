@@ -16,7 +16,7 @@ feature 'Sign up as a new user' do
 
     click_button 'Sign Up'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq new_project_path
     expect(page).to have_content 'You have successfully signed up'
   end
 
