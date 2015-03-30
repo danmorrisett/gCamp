@@ -55,7 +55,7 @@ class TasksController < ApplicationController
     private
 
     def ensure_membership
-      if !current_user.memberships.find_by(:project_id => @project.id)
+      unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(:project_id => @project.id))
         flash[:error] = 'You do not have access to that project'
         redirect_to projects_path
       end

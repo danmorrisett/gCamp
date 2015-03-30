@@ -1,6 +1,8 @@
 class MembershipsController < ApplicationController
 
-  before_action :ensure_current_user  
+  before_action :set_project
+  before_action :ensure_current_user
+  before_action :ensure_membership
 
   before_action do
     @project = Project.find(params[:project_id])
@@ -42,6 +44,17 @@ class MembershipsController < ApplicationController
   end
 
   private
+
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
+  def ensure_membership
+    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(:project_id => @project.id))
+      flash[:error] = 'You do not have access to that project'
+      redirect_to projects_path
+    end
+  end
 
   def membership_params
     params.require(:membership).permit(:role, :project_id, :user_id)
