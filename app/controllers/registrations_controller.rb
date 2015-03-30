@@ -10,7 +10,7 @@ class RegistrationsController < StaticController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'You have successfully signed up'
-      redirect_to "/"
+      redirect_to new_project_path
     else
       render :new
     end
