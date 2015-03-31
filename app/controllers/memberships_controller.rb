@@ -47,7 +47,7 @@ class MembershipsController < ApplicationController
   private
 
   def ensure_atleast_1_owner
-    if @project.memberships(role: 1).count == 1 && @membership.role == "owner"
+    if @project.memberships.where(role: 1).count <= 1 && @membership.role == "owner"
       flash[:error] = "Projects must have atleast one owner"
       redirect_to project_memberships_path(@project)
     end
