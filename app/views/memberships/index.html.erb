@@ -25,7 +25,7 @@
   </div>
   <% end %>
 
-
+<% if @project.memberships.where(user_id: current_user.id).pluck(:role) == [1] %>
   <div class="row">
     <%= form_for [@project, @membership], html: {class: "form-inline" } do |f| %>
     <div class='col-md-7'>
@@ -35,7 +35,6 @@
         <%= f.submit "Add New Member", class: 'btn btn-primary' %>
       </div>
     </div>
-    <% end %>
   </div>
   <br />
   <div class= "row col-sm-10">
@@ -45,18 +44,33 @@
       <%= form_for [@project, membership], html: {class: "form-inline"} do |f| %>
       <tbody>
         <tr>
-
           <td><%= link_to membership.user.full_name, user_path(membership.user) %></td>
           <td><%= f.collection_select(:role, Membership.roles, :second, :first, {selected: Membership.roles[membership.role]}, {class:'form-control'}) %></td>
           <td><%= f.submit "Update", class: "btn btn-primary" %></td>
           <td><%= link_to "",project_membership_path(@project, membership), method: :delete, class: "glyphicon glyphicon-remove"%><td>
-
+    <% end %>
 
           </tr>
 
         </tbody>
+
         <% end %>
         <% end %>
+        <% end %>
+        <% else %>
+
+        <div class= "row col-sm-10">
+          <table class= "table">
+            <% @project.memberships.each do |membership| %>
+            <% if membership.id && membership.user.present? %>
+            <tbody>
+              <tr>
+                <td><%= link_to membership.user.full_name, user_path(membership.user)%></td>
+                <td><%= membership.role %></td>
+              </tr>
+            <% end %>
+            <% end %>
+
         <% end %>
       </table>
     </div>
