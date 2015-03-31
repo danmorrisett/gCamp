@@ -4,8 +4,8 @@ class MembershipsController < ApplicationController
   before_action :set_project
   before_action :set_membership, only: [:edit, :update, :destroy]
   before_action :ensure_membership, only: [:index]
-  before_action :ensure_atleast_1_owner, only: [:update, :destroy]
   before_action :ensure_current_user_is_owner, only: [:update, :destroy]
+  before_action :ensure_atleast_1_owner, only: [:update, :destroy]
 
   before_action do
     @project = Project.find(params[:project_id])
