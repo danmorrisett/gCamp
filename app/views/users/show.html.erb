@@ -16,13 +16,16 @@
 
 
     <dl class= "dl-horizontal">
+
       <dt>First Name
         <dd><%= @user.first_name %></dd>
       </dt>
         <dt>Last Name
           <dd><%= @user.last_name %></dd>
+      <% if current_user == @user %>
         <dt>Email
           <dd><%= mail_to @user.email %></dd>
+          <% end %>
         </dt>
 
       </dl>

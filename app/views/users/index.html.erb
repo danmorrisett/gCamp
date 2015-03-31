@@ -19,9 +19,12 @@
       <% @users.each do |user| %>
       <tr>
         <p><td><%= link_to user.first_name.capitalize + ' ' + user.last_name.capitalize, user_path(user) %></td></p>
+        <% if current_user == user %>
         <td><%= mail_to user.email %></td>
-        <td><% if current_user == user %>
-          <%= link_to "Edit", edit_user_path(user) %>
+          <td><%= link_to "Edit", edit_user_path(user) %></td>
+          <% else %>
+          <td></td>
+          <td></td>
         <% end %>
         </td>
       </tr>
