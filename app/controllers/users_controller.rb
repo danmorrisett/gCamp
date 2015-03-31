@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :ensure_current_user
+  before_action :require_admin, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -26,9 +27,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if current_user != @user
-      render file: "#{Rails.root}/public/404.html", layout: false
-    end
   end
 
   def update
@@ -52,6 +50,14 @@ class UsersController < ApplicationController
 
 
     private
+
+    def require_admin
+      unless current_user == @user || current_user.admin == true
+        render file: "#{Rails.root}/public/404.html", layout: false
+      end
+    end
+
+
      def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end

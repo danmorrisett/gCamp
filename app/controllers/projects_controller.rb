@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = current_user.projects
+    @all_projects = Project.all
 
   end
 
