@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   before_action :ensure_current_user
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :ensure_membership, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_owner, only: [:update, :edit, :destroy]
 
   def index
     @projects = current_user.projects
@@ -45,6 +46,14 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def ensure_owner
+      unless current_user.project_owner(@project)
+        flash[:error] = 'You do not have access'
+        redirect_to project_path(@project)
+      end
+    end
+
 
   def set_project
     @project = Project.find(params[:id])

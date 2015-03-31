@@ -19,8 +19,10 @@
             <% end %>
             <li class="divider"></li>
             <li><%= link_to 'New Project', new_project_path %></a></li>
+
           </ul>
         </li>
+        <li> <%= link_to "Users", users_path %> </li>
       </ul>
 
 
@@ -66,20 +68,14 @@
 
     <div class = "row">
       <div class = "text-center">
+        <%= link_to "Home", root_path%>
+        |
         <%= link_to "Terms", terms_path%>
         |
         <%= link_to "About", about_path%>
         |
         <%= link_to "FAQ", faq_path%>
 
-        <% if current_user %>
-
-          |
-          <%= link_to "Users", users_path%>
-          |
-          <%= link_to "Projects", projects_path%>
-
-        <% end %>
       </div>
     </div>
 </footer>

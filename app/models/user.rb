@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   has_many :projects, through: :memberships
   has_many :comments
 
+  def project_owner(project)
+    self.memberships.find_by(project_id: project.id).role == 'owner'
+  end
+
 end

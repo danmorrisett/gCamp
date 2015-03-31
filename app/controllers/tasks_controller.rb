@@ -2,7 +2,7 @@ class TasksController < ApplicationController
 
   before_action :ensure_current_user
   before_action :find_and_set_project
-  before_action :ensure_membership, only: [:index]
+  before_action :ensure_membership
 
 
   before_action do
