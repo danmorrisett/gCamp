@@ -60,12 +60,6 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-  def ensure_membership
-    if !current_user.memberships.find_by(:project_id => @project.id)
-      flash[:error] = 'You do not have access to that project'
-      redirect_to projects_path
-    end
-  end
 
   def project_params
     params.require(:project).permit(:name)

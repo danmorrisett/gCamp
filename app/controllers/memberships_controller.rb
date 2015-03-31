@@ -61,12 +61,6 @@ class MembershipsController < ApplicationController
     @membership = Membership.find(params[:id])
   end
 
-  def ensure_membership
-    unless Membership.where(project_id: @project.id).include?(current_user.memberships.find_by(:project_id => @project.id))
-      flash[:error] = 'You do not have access to that project'
-      redirect_to projects_path
-    end
-  end
 
   def membership_params
     params.require(:membership).permit(:role, :project_id, :user_id)
