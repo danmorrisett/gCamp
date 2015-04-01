@@ -28,6 +28,9 @@
       <% end %>
     </tbody>
   </table>
+  <div class="page-header">
+    <h1>Pivotal Tracker Projects</h1>
+  </div>
 
   <table class= "table">
     <thead>
@@ -41,7 +44,7 @@
     <tbody>
       <tr>
 
-        <td><%= project_hash[:name]  %></td>
+        <td><%= link_to project_hash[:name], tracker_project_path(project_hash[:id], project_name: project_hash[:name])  %></td>
 
       </tr>
     </tbody>

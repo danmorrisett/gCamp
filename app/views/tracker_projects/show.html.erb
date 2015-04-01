@@ -1,0 +1,43 @@
+
+<div class= "container">
+  <div class= "page-header">
+    <div class= "pull-right">
+      (showing first 500)
+    </div>
+  <h1><%= "Stories for #{@tracker_project}" %></h1>
+  </div>
+
+
+  <table class= "table table-striped">
+    <thead>
+      <tr>
+        <th>Story</th>
+        <th>Estimate</th>
+        <th>Labels</th>
+        <th>Current State</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tracker_stories.each do |story| %>
+      <tr>
+        <td><%= link_to story[:name], story[:url] %> </td>
+        <td><%= story[:estimate] %></td>
+
+
+        <td>
+          <% label_story = [] %>
+          <% story[:labels].each do |label| %>
+            <% label_story << label[:name]  %>
+          <% end %>
+            <%= label_story.join(',') %>
+
+
+        </td>
+        <td><%= story[:current_state] %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
