@@ -22,17 +22,16 @@
       </dt>
         <dt>Last Name
           <dd><%= @user.last_name %></dd>
-      <% if current_user == @user || current_user.admin == true %>
+      <% if current_user == @user || current_user.admin || current_user.members_email_project(@user) %>
         <dt>Email
           <dd><%= mail_to @user.email %></dd>
 
-          <dt>Pivotal Tracker Token</dt>
-            <dd><%= @user.trackertoken[0..3]+@user.trackertoken[4..100].gsub(/./, '*') %> </dd>
-
-
       <% end %>
+
+          <dt>Pivotal Tracker Token</dt>
+            <% if @user.trackertoken.present? %>
+            <dd><%= @user.trackertoken[0..3]+@user.trackertoken[4..100].gsub(/./, '*') %> </dd>
+            <% end %>
         </dt>
-
       </dl>
-
 </div>

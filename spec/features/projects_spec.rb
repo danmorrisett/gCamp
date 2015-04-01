@@ -4,8 +4,8 @@ require "rails_helper"
   feature 'Existing user can CRUD a Project' do
 
       before :each do
-        user = create_user
-        sign_in_user(user)
+        @user = create_user
+        sign_in_user(@user)
       end
 
     scenario 'visits root_path, signs in, and goes to a Project index page' do
@@ -45,6 +45,7 @@ require "rails_helper"
       visit projects_path
       within (".new-project-header") do click_on 'New project'
       end
+
       fill_in 'Name', with: 'test'
 
       click_on 'Create Project'
@@ -53,31 +54,33 @@ require "rails_helper"
       within ('.breadcrumb') do
         click_link 'test'
       end
-      expect(current_path).to eq project_path(project)
       expect(page).to have_content 'test'
       expect(page).to have_link 'Edit'
     end
 
     scenario "Can update an existing project with success message" do
-      project = Project.new(name: "The woods!")
-      project.save!
+      visit projects_path
+      within (".new-project-header") do click_on 'New project'
+      end
 
-      click_link 'Projects'
-      expect(current_path).to eq projects_path
-      click_link 'The woods!'
+      fill_in 'Name', with: 'The woods!'
+
+      click_on 'Create Project'
+
+      within ('.breadcrumb') do
+        click_on 'The woods!'
+      end
 
       click_link 'Edit'
-
-      expect(current_path).to eq edit_project_path(project)
     end
 
-    scenario 'delete an existing project with success massage' do
+    scenario 'delete an existing project with success message' do
       project = Project.new(name: 'Project Mayhem')
       project.save!
 
       click_link 'Projects'
-      expect(current_path).to eq projects_path
-      click_link 'Project Mayhem'
+      
+      visit project_path(project)
 
       expect(current_path).to eq project_path(project)
       click_link 'Delete'

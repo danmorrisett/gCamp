@@ -4,6 +4,7 @@ require 'rails_helper'
     scenario 'can log in to see tasks, projects, and user' do
       user = User.new(first_name: 'Mo', last_name: 'Ali', email: 'MoAli@gmail.com', password:'123')
       user.save!
+      Project.create!(name: '2')
 
       visit root_path
       click_link 'Sign In'
@@ -14,6 +15,8 @@ require 'rails_helper'
       fill_in :email, with: user.email
       fill_in :password, with: '123'
       click_button 'Sign In'
+
+      expect(page).to have_content "Projects"
 
       expect(current_path).to eq "/projects"
       expect(page).to have_content 'You have signed in successfully'

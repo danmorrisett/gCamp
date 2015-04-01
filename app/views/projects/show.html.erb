@@ -1,7 +1,7 @@
 <div class="container">
   <div class="page-header">
       <div class="pull-right">
-        <% if current_user.memberships.find_by(role: 1, project_id: @project.id)  %>
+        <% if current_user.memberships.find_by(role: 1, project_id: @project.id) || current_user.admin  %>
           <%= link_to 'Edit', edit_project_path(@project), class:"btn btn-info" %>
         <% end %>
       </div>
@@ -17,7 +17,7 @@
 
   <%= link_to "#{pluralize(@project.memberships.count, "Membership")}", project_memberships_path(@project) %>
 
-  <% if current_user.memberships.find_by(role: 1, project_id: @project.id)%>
+  <% if current_user.memberships.find_by(role: 1, project_id: @project.id) || current_user.admin %>
     <div class="well">
         <h4>Delete Project</h4>
         <p> <%= "Deleting this project will also delete #{pluralize(@project.memberships.count, 'membership').sub(/d+s/, "") },

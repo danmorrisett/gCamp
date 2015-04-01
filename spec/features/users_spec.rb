@@ -65,12 +65,10 @@ feature "Check users pages w flash and validations" do
 
   scenario "users can edit users detials except password" do
 
-    new_user = User.new({first_name: "Bill", last_name: "Clinton", email: "cool@names.com", password: "password", password_confirmation: "password"})
+    new_user = User.new({first_name: "Bill", last_name: "Clinton", email: "cool@names.com", password: "password", password_confirmation: "password", admin: true})
     new_user.save
 
-    visit "/users/#{new_user[:id]}"
-
-    click_on ("Edit")
+    visit edit_user_path(new_user)
 
     expect(page).to have_content ("Edit User")
 
@@ -101,12 +99,10 @@ feature "Check users pages w flash and validations" do
     new_user = User.new({first_name: "Freddie", last_name: "Mercury", email: "cool@names.com", password: "password"})
     new_user.save
 
-    visit "/users/#{new_user[:id]}"
-
-    click_on ("Edit")
+    visit edit_user_path(new_user)
 
     click_on ("Delete User")
-    
+
     expect(page).to have_content ("User was successfully deleted.")
     expect(page).to have_no_content ("Freddie Mercury")
     expect(current_path).to eq("/users")

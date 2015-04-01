@@ -25,7 +25,7 @@
   </div>
   <% end %>
 
-<% if @project.memberships.where(user_id: current_user.id).pluck(:role) == [1] %>
+<% if @project.memberships.where(user_id: current_user.id).pluck(:role) == [1] || current_user.admin %>
   <div class="row">
     <%= form_for [@project, @membership], html: {class: "form-inline" } do |f| %>
     <div class='col-md-7'>

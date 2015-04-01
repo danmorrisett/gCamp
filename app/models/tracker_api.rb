@@ -11,7 +11,14 @@ class TrackerAPI
       req.headers['X-TrackerToken'] = token
     end
     JSON.parse(response.body, symbolize_names: true)
+
+  if response.status == 403
+    403
+  else
+    JSON.parse(response.body, symbolize_names: true)
   end
+end
+
 
   def stories(token, project_id)
     response = @conn.get do |req|
@@ -21,5 +28,7 @@ class TrackerAPI
     end
     JSON.parse(response.body, symbolize_names: true)
   end
+
+
 
 end

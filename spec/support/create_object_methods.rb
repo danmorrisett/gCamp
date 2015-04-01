@@ -19,7 +19,8 @@ def create_user(option= {})
   last_name: 'Clinton',
   email: 'Bill@Cigars.com',
   password: 'Cigars',
-  password_confirmation: 'Cigars'
+  password_confirmation: 'Cigars',
+  admin: true
   })
 end
 

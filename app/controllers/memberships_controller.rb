@@ -4,8 +4,8 @@ class MembershipsController < ApplicationController
   before_action :set_project
   before_action :set_membership, only: [:edit, :update, :destroy]
   before_action :ensure_membership, only: [:index]
-  before_action :ensure_current_user_is_owner, only: [:update, :destroy]
   before_action :ensure_atleast_1_owner, only: [:update, :destroy]
+  before_action :ensure_current_user_is_owner, only: [:update]
 
   before_action do
     @project = Project.find(params[:project_id])
@@ -38,9 +38,14 @@ class MembershipsController < ApplicationController
   end
 
   def destroy
+    if @membership.user == current_user || Membership.where(role: 1, user_id: current_user.id, project_id: @project.id).present? || current_user.admin
     @membership.destroy
     flash[:notice] = "#{@membership.user.full_name} was removed from project"
     redirect_to projects_path
+  else
+    flash[:notice] = "You do not have access"
+    redirect_to project_path(@project)
+  end
   end
 
 

@@ -33,6 +33,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
@@ -52,7 +53,7 @@ class ProjectsController < ApplicationController
   private
 
   def ensure_owner
-      unless current_user.project_owner(@project)
+      unless current_user.project_owner(@project) || current_user.admin
         flash[:error] = 'You do not have access'
         redirect_to project_path(@project)
       end

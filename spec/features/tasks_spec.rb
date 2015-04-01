@@ -19,9 +19,7 @@ feature 'Existing user can CRUD a Task' do
 
     project = create_project
 
-    click_link 'Projects'
-
-    click_link '0'
+    visit project_tasks_path(project)
 
     click_link 'New Task'
 

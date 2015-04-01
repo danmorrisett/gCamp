@@ -1,5 +1,7 @@
 class TrackerProjectsController < ApplicationController
 
+  
+
   def show
     if current_user.trackertoken.present?
       tracker_api = TrackerAPI.new
