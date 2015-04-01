@@ -34,6 +34,13 @@
   </div>
 </div>
 
+<div class="form-group">
+  <%= f.label :trackertoken, "Pivotal Tracker Token", class: "col-sm-2 control-label" %>
+  <div class="col-sm-6">
+    <%= f.password_field :trackertoken, class: "form-control" %>
+  </div>
+</div>
+
 <% if current_user.admin == true %>
 <div class="form-group">
   <div class="col-sm-offset-2 col-sm-10">
