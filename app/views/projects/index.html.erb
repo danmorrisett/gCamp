@@ -29,4 +29,25 @@
     </tbody>
   </table>
 
+  <table class= "table">
+    <thead>
+      <tr>
+        <th> Name </th>
+      </tr>
+    </thead>
+
+    <% if current_user.trackertoken %>
+      <% @pivotal_projects.each do |project_hash| %>
+    <tbody>
+      <tr>
+
+        <td><%= project_hash[:name]  %></td>
+
+      </tr>
+    </tbody>
+      <% end %>
+    <% end %>
+  </table>
+
+
 </div>
