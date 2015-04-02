@@ -4,11 +4,11 @@ def create_project(options= {})
   }.merge(options))
 end
 
-def create_membership(options = {})
+def create_membership(project, user, options = {})
   Membership.create!({
-    user_id: create_user.id,
-    project_id: create_project.id,
-    role: 'Member'
+    user_id: user.id,
+    project_id: project.id,
+    role: 'member'
   }.merge(options))
 end
 
@@ -21,13 +21,13 @@ def create_task(options= {})
   }.merge(options))
 end
 
-def create_user(option= {})
+def create_user(options = {})
   User.create!({
-  first_name: 'Bill',
-  last_name: 'Clinton',
-  email: "Bill#{rand(10000)+1}@Cigars.com",
-  password: 'Cigars',
-  password_confirmation: 'Cigars',
-  admin: true
-  })
+    first_name: 'Bill',
+    last_name: 'Clinton',
+    email: "Bill#{rand(10000)+1}@Cigars.com",
+    password: 'Cigars',
+    password_confirmation: 'Cigars',
+    admin: true
+  }.merge(options))
 end

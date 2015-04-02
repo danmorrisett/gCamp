@@ -48,6 +48,7 @@ describe ProjectsController do
       end
     end
   end
+
   describe 'GET #show' do
     describe 'Permissions' do
       it 'redirects a visitor to sign in path' do
@@ -56,10 +57,9 @@ describe ProjectsController do
         get :show, id: project.id
         expect(response).to redirect_to sign_in_path
       end
-      it 'redirects a non member to projects path' do
-      end
     end
   end
+
   describe 'GET #edit' do
     describe 'Permissions' do
       it 'redirects a visitor to sign in path' do
@@ -68,12 +68,9 @@ describe ProjectsController do
         get :edit, id: project.id
         expect(response).to redirect_to sign_in_path
       end
-      it 'redirects a non-member to projects path' do
-      end
-      it 'redirects a member to projects path' do
-      end
     end
   end
+
   describe 'patch #update' do
     describe 'Permissions' do
       it 'redirects a visitor to sign in path' do
@@ -82,31 +79,63 @@ describe ProjectsController do
         expect(response).to redirect_to sign_in_path
       end
       it 'redirects a non-member to projects path' do
+        user = create_user(admin: false)
+        session[:user_id] = user.id
+        project = create_project
+
+        patch :update, id: project.id
+
+        expect(flash[:error]).to eq 'You do not have access to that project'
+        expect(response).to redirect_to projects_path
       end
       it 'redirects a member to projects path' do
+        user = create_user(admin: false)
+        session[:user_id] = user.id
+        project = create_project
+        membership = create_membership(project, user)
+
+        patch :update, id: project.id
+
+        expect(response).to redirect_to project_path
+
       end
     end
   end
   describe 'DELETE #destroy' do
     describe 'Permissions' do
       it 'redirects a visitor to sign in path' do
-        User.destroy_all
-        user = User.create!(first_name: "Bob", last_name: "Ross", email: "BobR@gmail.com", password: "123", admin: "false")
-        session[:user_id] = user.id
         project = Project.create!(name: "Happy")
-        Membership.create!(user_id: user.id, project_id: project.id, role: 1)
 
         expect {
           delete :destroy, id: project.id
-        }.to change { Project.all.count }.by(-1)
+        }.to_not change { Project.all.count }
 
-
+        expect(response).to redirect_to sign_in_path
       end
+
       it 'redirects a non-member to projects path' do
+        user = create_user(admin: false)
+        session[:user_id] = user.id
+        project = create_project
+
+        delete :destroy, id: project.id
+
+        expect(flash[:error]).to eq 'You do not have access to that project'
+        expect(response).to redirect_to projects_path
       end
       it 'redirects a member to projects path' do
-      end
+        user = create_user(admin: false)
+        session[:user_id] = user.id
+        project = create_project
+        membership = create_membership(project, user)
 
+        expect{
+          delete :destroy, id: project.id
+        }.to_not change { Project.count }
+
+        expect(flash[:error]).to eq 'You do not have access'
+        expect(response).to redirect_to project_path(project)
+      end
     end
   end
 end
