@@ -93,9 +93,6 @@ describe TasksController do
     }.to change { task.reload.description }.from("New Task").to("More Power")
 
     task = Task.last
-
-
-
     end
   end
 
