@@ -17,7 +17,6 @@ def create_task(options= {})
     description: 'New Task',
     due_date: '01/01/2001',
     complete: false,
-    project_id: create_project.id
   }.merge(options))
 end
 
